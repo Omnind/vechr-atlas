@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  influxdb:
+    image: influxdb:2.1.0-alpine
+    container_name: influxdb
+    restart: always
+    environment:
+      - INFLUXDB_DB=iiot
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+
+  nats-server:
+    container_name: nats-server
+    build:
+      context: ./dockerfiles
+      dockerfile: nats.dockerfile
+      args:
+        - NATS_VERSION=${NATS_VERSION:-alpine}
+    ports:
+      - 1883:1883
+      - 4222:4222
+
+   # Eclipse Mosquitto MQTT Broker
+  mosquitto:
+    container_name: mosquitto
+    build:
+      context: ./dockerfiles
+      dockerfile: mqtt.dockerfile
+      args:
+        - MOSQUITTO_VERSION=${MOSQUITTO_VERSION:-latest}
+    environment:
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+    restart: always
+    volumes:
+      - ./scripts:/scripts
+    ports:
+      - 1884:1883
+
+  #NATS Client
+  nats-box:
+    container_name: nats-box
+    image: synadia/nats-box:latest
+    stdin_open: true
+    tty: true
+
+volumes:
+  influxdb_data:
+
+networks:
+  default:
+    name: nats_mqtt_network
+    driver: bridge
