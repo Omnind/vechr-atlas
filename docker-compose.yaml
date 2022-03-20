@@ -1,5 +1,16 @@
 version: '3.8'
 services:
+  db-logger:
+    container_name: db-logger
+    build:
+      context: ./dockerfiles/microservices/db-logger
+      dockerfile: db-logger.dockerfile
+    working_dir: /app
+    volumes:
+      - ./microservices/db-logger-microservices:/app
+    ports:
+      - "3001:3000"
+
   influxdb:
     image: influxdb:2.1.0-alpine
     container_name: influxdb
