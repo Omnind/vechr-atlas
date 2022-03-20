@@ -1,0 +1,3 @@
+[submodule "microservices/db-logger-microservices"]
+	path = microservices/db-logger-microservices
+	url = git@github.com:zulfikar4568/db-logger-microservices.git
