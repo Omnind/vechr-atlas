@@ -1,6 +1,18 @@
 # kreMES (kre Manufacturing Execution System)
 This is Under [kreMES](LICENSE).
 
+# Setup Application
+Pull all repository include with sub-module
+
+## Pull repository
+```
+git clone --recursive git@github.com:zulfikar4568/kreMES.git
+```
+
+Edit `.env` file, configure `APP_LISTS`, this line will decided what are the list of container that you'll run.
+```
+APP_LISTS=auth-microservices,db-logger-microservices,influxdb,nats-server,mosquitto,nats-box
+```
 # Running Application
 
 ## Allowing Script

@@ -1,7 +1,23 @@
 version: '3.8'
 services:
-  db-logger:
-    container_name: db-logger
+  auth-microservices:
+    container_name: auth-microservices
+    build:
+      context: ./dockerfiles/microservices/auth
+      dockerfile: auth.dockerfile
+    working_dir: /app
+    volumes:
+      - ./microservices/auth-microservices:/app
+    ports:
+      - "3002:3000"
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+
+  db-logger-microservices:
+    container_name: db-logger-microservices
     build:
       context: ./dockerfiles/microservices/db-logger
       dockerfile: db-logger.dockerfile
@@ -10,6 +26,11 @@ services:
       - ./microservices/db-logger-microservices:/app
     ports:
       - "3001:3000"
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
 
   influxdb:
     image: influxdb:2.1.0-alpine
