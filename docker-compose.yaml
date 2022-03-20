@@ -1,5 +1,21 @@
 version: '3.8'
 services:
+  things-microservices:
+    container_name: things-microservices
+    build:
+      context: ./dockerfiles/microservices/things
+      dockerfile: things.dockerfile
+    working_dir: /app
+    volumes:
+      - ./microservices/things-microservices:/app
+    ports:
+      - "3003:3000"
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+
   auth-microservices:
     container_name: auth-microservices
     build:

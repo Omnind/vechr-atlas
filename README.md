@@ -2,7 +2,7 @@
 This is Under [kreMES](LICENSE).
 
 # Setup Application
-Pull all repository include with sub-module
+Before pulling you'll need to all **access** for submodule repository.
 
 ## Pull repository
 ```
@@ -11,15 +11,15 @@ git clone --recursive git@github.com:zulfikar4568/kreMES.git
 
 Edit `.env` file, configure `APP_LISTS`, this line will decided what are the list of container that you'll run.
 ```
-APP_LISTS=auth-microservices,db-logger-microservices,influxdb,nats-server,mosquitto,nats-box
+APP_LISTS=things-microservices,auth-microservices,db-logger-microservices,influxdb,nats-server,mosquitto,nats-box
 ```
-# Running Application
-
 ## Allowing Script
 Script must be have an access before executing
 ```
 chmod 777 scripts/
 ```
+
+# Running Application
 
 ## Running All Container
 ```bash

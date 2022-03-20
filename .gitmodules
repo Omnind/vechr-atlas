@@ -4,3 +4,6 @@
 [submodule "microservices/auth-microservices"]
 	path = microservices/auth-microservices
 	url = git@github.com:zulfikar4568/auth-microservices.git
+[submodule "microservices/things-microservices"]
+	path = microservices/things-microservices
+	url = git@github.com:zulfikar4568/things-microservices.git

@@ -10,6 +10,6 @@ RUN chmod +x /entrypoint/entrypoint.sh
 
 ENTRYPOINT ["/entrypoint/entrypoint.sh"]
 
-EXPOSE 3003
+EXPOSE 3001
 
 CMD [ "npm", "run", "start:dev" ]
