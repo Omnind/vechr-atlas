@@ -94,7 +94,8 @@ services:
   #NATS Client
   nats-box:
     container_name: nats-box
-    image: synadia/nats-box:latest
+    platform: linux/amd64
+    image: natsio/nats-box:latest
     stdin_open: true
     tty: true
 
