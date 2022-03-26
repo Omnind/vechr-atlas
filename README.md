@@ -17,6 +17,7 @@ APP_LISTS=things-microservices,auth-microservices,db-logger-microservices,influx
 Script must be have an access before executing
 ```
 chmod 777 scripts/
+chmod 777 ./dockerfiles/database/postgres/create-multiple-db.sh
 ```
 
 # Running Application

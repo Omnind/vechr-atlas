@@ -31,6 +31,7 @@ services:
       - nats-server
       - mosquitto
       - nats-box
+      - postgres-db
 
   auth-microservices:
     container_name: auth-microservices
@@ -47,6 +48,29 @@ services:
       - nats-server
       - mosquitto
       - nats-box
+      - postgres-db
+      
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:13
+    volumes:
+      - ./dockerfiles/database/postgres:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  pg-admin4:
+    container_name: pg-admin4
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
 
   db-logger-microservices:
     container_name: db-logger-microservices
@@ -117,6 +141,7 @@ services:
 
 volumes:
   influxdb_data:
+  postgres_data:
 
 networks:
   default:
