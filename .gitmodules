@@ -7,3 +7,6 @@
 [submodule "microservices/things-microservices"]
 	path = microservices/things-microservices
 	url = git@github.com:zulfikar4568/things-microservices.git
+[submodule "microservices/api-gateway-microservices"]
+	path = microservices/api-gateway-microservices
+	url = git@github.com:zulfikar4568/api-gateway-microservices.git

@@ -85,3 +85,18 @@ You can execute this script several time
 #or using this instead mqtt-pub.sh
 mosquitto_pub -h nats-server -p 1883 -t "NATS/MQTT/Test/" -m "This is message from mqtt"
 ```
+
+
+## Publish MQTT Data
+Please use this topic format to store in database
+`kreMES/DashboardID/<Your Dashboard ID>/DeviceID/<Your Device ID>/topic/<Your Topic Name>`
+```bash
+mosquitto_pub -h nats-server -p 1883 -t "kreMES/DashboardID/87jk234/DeviceID/9jk2b2189/topic/temp" -m "80.23"
+```
+
+## Query Data using Rest API
+```bash
+curl -X GET http://localhost:3000/api/query \
+   -H 'Content-Type: application/json' \
+   -d '{"dashboardId": "87jk234", "deviceId": "9jk2b2189", "topic": "temp"}'
+```
