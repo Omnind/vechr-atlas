@@ -25,7 +25,14 @@ chmod 777 ./dockerfiles/database/postgres/create-multiple-db.sh
 ## Running All Container
 ```bash
 ./up.sh
+./dockerfiles/kong/setup-kong.sh
 ```
+
+# Setup Account Kong
+Go to `http://localhost:1337`
+1. Create your account
+2. Login
+3. Setup the connection with the kong, in this case we use `http://kong:8001` as a kong admin API
 
 ## Stoping All Container
 ```bash
