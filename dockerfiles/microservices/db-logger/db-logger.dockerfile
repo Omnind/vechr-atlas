@@ -1,6 +1,8 @@
-FROM node:17.6.0-alpine
+FROM node:lts
 
 WORKDIR /app
+
+RUN apt-get -qy update && apt-get -qy install openssl
 
 RUN npm i -g @nestjs/cli
 
