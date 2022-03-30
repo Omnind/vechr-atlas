@@ -1,5 +1,8 @@
-# kreMES (kre Manufacturing Execution System)
-This is Under [kreMES](LICENSE).
+<p align="center">
+  <a href="" target="blank"><img src="https://svgshare.com/i/fmL.svg" width="320" alt="kreMES Logo" /></a>
+</p>
+
+kreMES (kre Manufacturing Execution System). This is Under [kreMES](LICENSE).
 
 # Setup Application
 Before pulling you'll need to all **access** for submodule repository.
@@ -11,7 +14,7 @@ git clone --recursive git@github.com:zulfikar4568/kreMES.git
 
 Edit `.env` file, configure `APP_LISTS`, this line will decided what are the list of container that you'll run.
 ```
-APP_LISTS=things-microservices,auth-microservices,db-logger-microservices,influxdb,nats-server,mosquitto,nats-box
+APP_LISTS=konga,konga-prepare,kong,postgres-db,pg-admin4,bff-microservices,things-microservices,auth-microservices,db-logger-microservices,influxdb,nats-server,mosquitto,nats-box
 ```
 ## Allowing Script
 Script must be have an access before executing
@@ -103,8 +106,11 @@ mosquitto_pub -h nats-server -p 1883 -t "kreMES/DashboardID/87jk234/DeviceID/9jk
 ```
 
 ## Query Data using Rest API
+Using curl
 ```bash
-curl -X GET http://localhost:3000/api/query \
+curl -X GET http://localhost:3000/logger/query \
    -H 'Content-Type: application/json' \
    -d '{"dashboardId": "87jk234", "deviceId": "9jk2b2189", "topic": "temp"}'
 ```
+
+Or you can use [OpenAPI Swagger UI](http://localhost:3000/api)
