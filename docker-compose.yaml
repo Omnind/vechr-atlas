@@ -1,13 +1,13 @@
 version: '3.8'
 services:
-  api-gateway-microservices:
-    container_name: api-gateway-microservices
+  bff-microservices:
+    container_name: bff-microservices
     build:
-      context: ./dockerfiles/microservices/api-gateway
-      dockerfile: api-gateway.dockerfile
+      context: ./dockerfiles/microservices/bff
+      dockerfile: bff.dockerfile
     working_dir: /app
     volumes:
-      - ./microservices/api-gateway-microservices:/app
+      - ./microservices/bff-microservices:/app
     ports:
       - "3000:3000"
     depends_on:
