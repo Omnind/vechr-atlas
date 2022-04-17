@@ -59,6 +59,8 @@ services:
       - ./microservices/things-microservices:/app
     ports:
       - "3003:3000"
+    env_file:
+      - ./microservices/things-microservices/.env
     depends_on:
       - influxdb
       - nats-server

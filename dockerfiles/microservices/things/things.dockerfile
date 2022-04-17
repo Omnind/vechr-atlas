@@ -12,6 +12,6 @@ RUN chmod +x /entrypoint/entrypoint.sh
 
 ENTRYPOINT ["/entrypoint/entrypoint.sh"]
 
-EXPOSE 3001
+EXPOSE 3003
 
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "yarn", "watch" ]
