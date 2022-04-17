@@ -26,6 +26,8 @@ services:
       - ./microservices/db-logger-microservices:/app
     ports:
       - "3001:3000"
+    env_file:
+      - microservices/db-logger-microservices/.env
     depends_on:
       - influxdb
       - nats-server
@@ -42,6 +44,8 @@ services:
       - ./microservices/auth-microservices:/app
     ports:
       - "3002:3000"
+    env_file:
+      - microservices/auth-microservices/.env
     depends_on:
       - influxdb
       - nats-server
