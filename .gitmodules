@@ -10,3 +10,6 @@
 [submodule "microservices/bff-microservices"]
 	path = microservices/bff-microservices
 	url = git@github.com:zulfikar4568/bff-microservices.git
+[submodule "application/web-app"]
+	path = application/web-app
+	url = git@github.com:zulfikar4568/web-app.git
