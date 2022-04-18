@@ -1,5 +1,18 @@
 version: '3.8'
 services:
+  web-app:
+    container_name: web-app
+    build:
+      context: ./dockerfiles/application/web-app
+      dockerfile: web-app.dockerfile
+    working_dir: /app
+    volumes:
+      - ./application/web-app:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - things-microservices
+      
   bff-microservices:
     container_name: bff-microservices
     build:
