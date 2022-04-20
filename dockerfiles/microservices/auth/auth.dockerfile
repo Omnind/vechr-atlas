@@ -14,4 +14,4 @@ ENTRYPOINT ["/entrypoint/entrypoint.sh"]
 
 EXPOSE 3002
 
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "yarn", "watch" ]
