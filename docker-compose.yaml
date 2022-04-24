@@ -212,6 +212,7 @@ services:
     ports:
       - 1883:1883
       - 4222:4222
+      - 9000:9090
 
    # Eclipse Mosquitto MQTT Broker
   mosquitto:
