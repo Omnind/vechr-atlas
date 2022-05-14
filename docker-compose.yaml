@@ -11,54 +11,40 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - things-microservices
-      
-  bff-microservices:
-    container_name: bff-microservices
-    build:
-      context: ./dockerfiles/microservices/bff
-      dockerfile: bff.dockerfile
-    working_dir: /app
-    volumes:
-      - ./microservices/bff-microservices:/app
-    ports:
-      - "3000:3000"
-    depends_on:
-      - influxdb
-      - nats-server
-      - mosquitto
-      - nats-box
+      - things-service
+      - db-logger-service
+      - auth-service
 
-  db-logger-microservices:
-    container_name: db-logger-microservices
+  db-logger-service:
+    container_name: db-logger-service
     build:
       context: ./dockerfiles/microservices/db-logger
       dockerfile: db-logger.dockerfile
     working_dir: /app
     volumes:
-      - ./microservices/db-logger-microservices:/app
+      - ./microservices/db-logger-service:/app
     ports:
       - "3001:3000"
     env_file:
-      - microservices/db-logger-microservices/.env
+      - microservices/db-logger-service/.env
     depends_on:
       - influxdb
       - nats-server
       - mosquitto
       - nats-box
 
-  auth-microservices:
-    container_name: auth-microservices
+  auth-service:
+    container_name: auth-service
     build:
       context: ./dockerfiles/microservices/auth
       dockerfile: auth.dockerfile
     working_dir: /app
     volumes:
-      - ./microservices/auth-microservices:/app
+      - ./microservices/auth-service:/app
     ports:
       - "3002:3000"
     env_file:
-      - microservices/auth-microservices/.env
+      - microservices/auth-service/.env
     depends_on:
       - influxdb
       - nats-server
@@ -66,18 +52,18 @@ services:
       - nats-box
       - postgres-db
 
-  things-microservices:
-    container_name: things-microservices
+  things-service:
+    container_name: things-service
     build:
       context: ./dockerfiles/microservices/things
       dockerfile: things.dockerfile
     working_dir: /app
     volumes:
-      - ./microservices/things-microservices:/app
+      - ./microservices/things-service:/app
     ports:
       - "3003:3000"
     env_file:
-      - ./microservices/things-microservices/.env
+      - ./microservices/things-service/.env
     depends_on:
       - influxdb
       - nats-server

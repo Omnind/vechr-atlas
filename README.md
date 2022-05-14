@@ -9,7 +9,7 @@ Before pulling you'll need to all **access** for submodule repository.
 
 ## Pull repository
 ```
-git clone --recursive git@github.com:zulfikar4568/kreMES.git
+git clone --recursive git@github.com:kre-tech/kreMES.git
 ```
 
 Edit `.env` file, configure `APP_LISTS`, this line will decided what are the list of container that you'll run.
