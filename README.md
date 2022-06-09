@@ -31,6 +31,11 @@ chmod 777 ./dockerfiles/database/postgres/create-multiple-db.sh
 ./dockerfiles/kong/setup-kong.sh
 ```
 
+## Setting Token Influx
+1. Go to http://localhost:8086
+2. Data > API Tokens > Copy your token
+3. Copy your token into .env `db-logger-service`
+
 # Setup Account Kong
 Go to `http://localhost:1337`
 1. Create your account

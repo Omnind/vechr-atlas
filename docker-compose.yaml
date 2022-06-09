@@ -73,7 +73,8 @@ services:
       
   postgres-db:
     container_name: postgres-db
-    image: postgres:13
+    image: postgres:14.3-alpine
+    restart: always
     volumes:
       - ./dockerfiles/database/postgres:/docker-entrypoint-initdb.d
       - postgres_data:/var/lib/postgresql/data
