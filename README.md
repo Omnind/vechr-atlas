@@ -14,7 +14,7 @@ git clone --recursive git@github.com:kre-tech/kreMES.git
 
 Edit `.env` file, configure `APP_LISTS`, this line will decided what are the list of container that you'll run.
 ```
-APP_LISTS=web-app,konga,konga-prepare,kong,postgres-db,pg-admin4,things-service,auth-service,db-logger-service,influxdb,nats-server,mosquitto,nats-box
+APP_LISTS=notification-service,mail-dev,web-app,konga,konga-prepare,kong,postgres-db,pg-admin4,things-service,auth-service,db-logger-service,influxdb,nats-server,mosquitto,nats-box
 ```
 ## Allowing Script
 Script must be have an access before executing

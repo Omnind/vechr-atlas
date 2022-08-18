@@ -10,7 +10,6 @@ services:
       - ./application/web-app:/app
     ports:
       - "8080:8080"
-      - "3031:3031"
     depends_on:
       - things-service
       - db-logger-service
@@ -68,6 +67,26 @@ services:
       - "9231:9229"
     env_file:
       - ./microservices/things-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
+  
+  notification-service:
+    container_name: notification-service
+    build:
+      context: ./dockerfiles/microservices/notification
+      dockerfile: notification.dockerfile
+    working_dir: /app
+    volumes:
+      - ./microservices/notification-service:/app
+    ports:
+      - "3004:3000"
+      - "9232:9229"
+    env_file:
+      - ./microservices/notification-service/.env
     depends_on:
       - influxdb
       - nats-server
@@ -230,6 +249,14 @@ services:
     stdin_open: true
     tty: true
 
+  mail-dev:
+    container_name: mail-dev
+    image: maildev/maildev
+    ports:
+      - ${EMAIL_SMTP_SERVER_PORT}:${EMAIL_SMTP_SERVER_PORT}
+      - ${EMAIL_SMTP_WEB}:${EMAIL_SMTP_WEB}
+    command: bin/maildev -w ${EMAIL_SMTP_WEB} -s ${EMAIL_SMTP_SERVER_PORT} --outgoing-host ${EMAIL_OUTGOING_HOST} --outgoing-user ${EMAIL_OUTGOING_ID} --outgoing-pass ${EMAIL_OUTGOING_PASS} --outgoing-port ${EMAIL_OUTGOING_PORT}
+    
 volumes:
   influxdb_data:
   postgres_data:

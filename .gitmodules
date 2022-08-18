@@ -10,3 +10,6 @@
 [submodule "application/web-app"]
 	path = application/web-app
 	url = git@github.com:kre-tech/web-app.git
+[submodule "microservices/notification-service"]
+	path = microservices/notification-service
+	url = git@github.com:kre-tech/notification-service.git
