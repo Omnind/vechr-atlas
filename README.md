@@ -28,7 +28,8 @@ chmod 777 ./dockerfiles/database/postgres/create-multiple-db.sh
 ## Running All Container
 ```bash
 ./up.sh
-./dockerfiles/kong/setup-kong.sh
+./dockerfiles/kong/setup-notification.sh
+./dockerfiles/kong/setup-things.sh
 ```
 
 ## Setting Token Influx
