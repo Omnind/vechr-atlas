@@ -13,8 +13,8 @@ curl -X POST http://localhost:8001/services \
 # Route
 curl -X POST http://localhost:8001/services/things-service/routes/ \
   -H "Content-Type: application/json" \
-  -d '{"name": "things-route", "paths": [ "/api/v1/things" ], "protocols": [ "http", "https" ], "methods": [ "GET", "PUT", "PATCH", "POST", "DELETE" ]}'
+  -d '{"name": "things-route", "paths": [ "/api/v1/things" ], "protocols": [ "http", "https" ], "methods": [ "GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT" ]}'
 
 curl -X POST http://localhost:8001/services/things-openapi/routes/ \
   -H "Content-Type: application/json" \
-  -d '{"name": "things-route-openapi", "paths": [ "/docs/v1/things", "/docs/things" ], "protocols": [ "http", "https" ], "methods": [ "GET", "PUT", "PATCH", "POST", "DELETE" ]}'
+  -d '{"name": "things-route-openapi", "paths": [ "/docs/v1/things", "/docs/things" ], "protocols": [ "http", "https" ], "methods": [ "GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT" ]}'
