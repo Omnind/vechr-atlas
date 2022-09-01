@@ -15,6 +15,15 @@ services:
       - things-service
       - db-logger-service
       - auth-service
+      - notification-service
+  
+  web-app-prod:
+    container_name: web-app-prod
+    image: zulfikar4568/web-app
+    ports:
+      - "8080:80"
+    env_file:
+      - application/web-app/.env
 
   db-logger-service:
     container_name: db-logger-service
@@ -27,6 +36,19 @@ services:
     ports:
       - "3001:3000"
       - "9229:9229"
+    env_file:
+      - microservices/db-logger-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+
+  db-logger-service-prod:
+    container_name: db-logger-service-prod
+    image: zulfikar4568/db-logger-service
+    ports:
+      - "3001:3000"
     env_file:
       - microservices/db-logger-service/.env
     depends_on:
@@ -54,6 +76,20 @@ services:
       - mosquitto
       - nats-box
       - postgres-db
+  
+  auth-service-prod:
+    container_name: auth-service-prod
+    image: zulfikar4568/auth-service
+    ports:
+      - "3002:3000"
+    env_file:
+      - microservices/auth-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
 
   things-service:
     container_name: things-service
@@ -67,7 +103,21 @@ services:
       - "3003:3000"
       - "9231:9229"
     env_file:
-      - ./microservices/things-service/.env
+      - microservices/things-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
+  
+  things-service-prod:
+    container_name: things-service-prod
+    image: zulfikar4568/things-service
+    ports:
+      - "3003:3000"
+    env_file:
+      - microservices/things-service/.env
     depends_on:
       - influxdb
       - nats-server
@@ -86,6 +136,19 @@ services:
     ports:
       - "3004:3000"
       - "9232:9229"
+    env_file:
+      - ./microservices/notification-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
+  notification-service-prod:
+    container_name: notification-service-prod
+    image: zulfikar4568/notification-service
+    ports:
+      - "3004:3000"
     env_file:
       - ./microservices/notification-service/.env
     depends_on:
@@ -208,6 +271,7 @@ services:
       - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASS}
       - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG} 
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_TOKEN}
     ports:
       - '8086:8086'
     volumes:

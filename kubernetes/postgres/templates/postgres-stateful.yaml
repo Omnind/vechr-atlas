@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ default "postgresdb" .Values.app.name }}
+  labels:
+    app: {{ default "postgresdb" .Values.app.name }}
+spec:
+  serviceName: {{ default "postgresdb" .Values.app.name }}-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ default "postgresdb" .Values.app.name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ default "postgresdb" .Values.app.name }}-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        resources:
+          requests:
+            storage: 1Gi
+  template:
+    metadata:
+      name: {{ default "postgresdb" .Values.app.name }}
+      labels:
+        app: {{ default "postgresdb" .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ default "postgresdb" .Values.app.name }}
+          image: postgres:14.3-alpine
+          imagePullPolicy: "IfNotPresent"
+          ports:
+          - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: {{ default "postgresdb" .Values.app.name }}-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: {{ default "postgresdb" .Values.app.name }}-pvc

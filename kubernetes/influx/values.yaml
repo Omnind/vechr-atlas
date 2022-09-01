@@ -1,0 +1,13 @@
+name: influxdb
+replicas: 2
+deployment:
+  image: influxdb
+  tag: 2.1.0-alpine
+influx:
+  mode: setup
+  organization: kreMES
+  bucket: kreMES
+  token: kremes-token
+auth:
+  username: admin
+  password: isnaen1998

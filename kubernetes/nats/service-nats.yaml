@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: nats
+  ports:
+    - protocol: TCP
+      port: 4222
+      targetPort: 4222
+      name: nats
+    - protocol: TCP
+      port: 1833
+      targetPort: 1833
+      name: mqtt
+    - protocol: TCP
+      port: 9000
+      targetPort: 9090
+      name: websocket

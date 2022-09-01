@@ -1,0 +1,6 @@
+name: notification-service
+deployment:
+  image: zulfikar4568/notification-service
+  tag: latest
+service:
+  port: 3002
