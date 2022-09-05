@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ default "postgresdb" .Values.app.name }}
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: {{ default "postgresdb" .Values.app.name }}
   ports:

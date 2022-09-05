@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ default "influxdb" .Values.name }}
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: {{ default "influxdb" .Values.name }}
   ports:

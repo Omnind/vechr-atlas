@@ -10,4 +10,9 @@ helm install things-db postgres --values ./postgres/things-db.values.yaml \
   && kubectl apply -f ./nats/service-nats.yaml \
   && helm install things-service service --values ./service/things-service.values.yaml \
   && helm install notification-service service --values ./service/notification-service.values.yaml \
-  && helm install db-logger-service service --values ./service/db-logger-service.values.yaml
+  && helm install db-logger-service service --values ./service/db-logger-service.values.yaml \
+  && helm install web-app fe --values ./fe/values.yaml \
+  && helm install kong -n kong kong/kong -f kong/values.yaml \
+  && kubectl apply -f ./kong/things-ingress.yaml \
+  && kubectl apply -f ./kong/notification-ingress.yaml \
+  && kubectl apply -f ./kong/fe-ingress.yaml
