@@ -1,0 +1,6 @@
+name: db-logger-service
+deployment:
+  image: zulfikar4568/db-logger-service
+  tag: latest
+service:
+  port: 3003

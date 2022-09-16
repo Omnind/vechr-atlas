@@ -4,6 +4,31 @@
 
 kreMES (kre Manufacturing Execution System). This is Under [kreMES](LICENSE).
 
+# Importance Concepts
+The concep of this application is use UNS (Unified Namespace) as big node of the data. 
+
+## Unified Namespace IIoT
+
+<p align="center">
+  <a href="" target="blank"><img src="./images/UNS.png" width="720" alt="kreMES Logo" /></a>
+</p>
+
+Unified Namespace is an extended event-driven architecture, in which all data gets published regardless of whether there is an actual consumer or not. We leverages MQTT/NATS as a central message broker.
+
+## ISA-95
+
+<p align="center">
+  <a href="" target="blank"><img src="./images/ISA-95.png" width="720" alt="kreMES Logo" /></a>
+</p>
+
+If we compare with ISA-95, the data will flow from the Bottom (PLC) to the until Upper (Cloud), this is industry 3.0, In Industry 3.0 setups the general dataflow would be somewhat linear and would only flow in one direction: From the sensors to the PLC to SCADA and MES to the ERP. With a unified this would be much more connected, so if we compare with UNS, (ERP, SCADA, etc) we can say **node** and node will publish and consume the data from UNS system, so this will achieve integration more easy.
+
+# Architecture Diagram
+
+<p align="center">
+  <a href="" target="blank"><img src="./images/IIoTArch.png" width="720" alt="kreMES Logo" /></a>
+</p>
+
 # Setup Application
 Before pulling you'll need to all **access** for submodule repository.
 

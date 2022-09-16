@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.name }}"
+  labels:
+    app: "{{ .Values.name }}"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "{{ .Values.name }}"
+  template:
+    metadata:
+      name: "{{ .Values.name }}"
+      labels:
+        app: "{{ .Values.name }}"
+    spec:
+      containers:
+        - name: "{{ .Values.name }}"
+          image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.name }}-config
+          {{- if .Values.deployment.resources }}
+          resources:
+            {{- if .Values.deployment.resources.requests }}
+            requests:
+              memory: {{ .Values.deployment.resources.requests.memory | default "512Mi" | quote }}
+              cpu: {{ .Values.deployment.resources.requests.cpu | default "500m" | quote }}
+            {{- else}}
+            requests:
+              memory: "50Mi"
+              cpu: "10m"
+            {{- end}}
+            {{- if .Values.deployment.resources.limits }}
+            limits:
+              memory: {{ .Values.deployment.resources.limits.memory | default "1024Mi" | quote }}
+              cpu: {{ .Values.deployment.resources.limits.cpu | default "1" | quote }}
+            {{- else}}  
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+            {{- end }}
+          {{- else }}
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+          {{- end}}
