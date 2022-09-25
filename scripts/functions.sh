@@ -85,6 +85,6 @@ function check_container_running() {
 
 printf "${GREEN}\n"
 
-echo "kreMES by: kreMES Teams :)"
+echo "Vechr by: Vechr Teams :)"
 
 printf "${NC}\n"

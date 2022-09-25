@@ -9,17 +9,17 @@ data:
   NATS_URL: "nats://nats.default.svc.cluster.local:4222"
 {{- if eq "db-logger-service" $.Values.name }}
   INFLUX_URL: "http://influxdb-service.default.svc.cluster.local:8086/"
-  INFLUX_TOKEN: "kremes-token"
-  INFLUX_ORG: "kreMES"
-  INFLUX_BUCKET: "kreMES"
+  INFLUX_TOKEN: "vechr-token"
+  INFLUX_ORG: "Vechr"
+  INFLUX_BUCKET: "Vechr"
 {{- end }}
 {{- if eq "things-service" $.Values.name }}
-  DB_URL: "postgresql://kreMES:123@things-db-service.default.svc.cluster.local:5433/things_db?schema=public&connect_timeout=300"
+  DB_URL: "postgresql://Vechr:123@things-db-service.default.svc.cluster.local:5433/things_db?schema=public&connect_timeout=300"
 {{- end }}
 {{- if eq "notification-service" $.Values.name }}
   EMAIL_ID: isnaen71@gmail.com
   EMAIL_PASS: ofhbzrgtvmzbgrlh
   EMAIL_HOST: gmail-service.default.svc.cluster.local
   EMAIL_PORT: "587"
-  DB_URL: "postgresql://kreMES:123@notification-db-service.default.svc.cluster.local:5434/notification_db?schema=public&connect_timeout=300"
+  DB_URL: "postgresql://Vechr:123@notification-db-service.default.svc.cluster.local:5434/notification_db?schema=public&connect_timeout=300"
 {{- end }}

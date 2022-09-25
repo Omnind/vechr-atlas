@@ -6,10 +6,10 @@ description: PostgreSQL chart for Kubernetes
 type: application
 version: 0.0.1
 keywords:
-- kreMES
+- Vechr
 - IoT
 
-home: https://github.com/kre-tech/kreMES
+home: https://github.com/kre-tech/Vechr
 maintainers:
   - name: zulfikar
     url: https://github.com/zulfikar4568

@@ -2,14 +2,14 @@ apiVersion: v2
 appVersion: "1.0.0"
 
 name: Client
-description: Frontend Chart for kreMES Kubernetes
+description: Frontend Chart for Vechr Kubernetes
 keywords:
-- kreMES
+- Vechr
 - IoT
 
 type: application
 version: 0.0.1
-home: https://github.com/kre-tech/kreMES
+home: https://github.com/vechr
 maintainers:
   - name: zulfikar
     url: https://github.com/zulfikar4568

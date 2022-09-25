@@ -5,9 +5,9 @@ deployment:
   tag: 2.1.0-alpine
 influx:
   mode: setup
-  organization: kreMES
-  bucket: kreMES
-  token: kremes-token
+  organization: Vechr
+  bucket: Vechr
+  token: vechr-token
 auth:
   username: admin
   password: isnaen1998

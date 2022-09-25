@@ -27,22 +27,22 @@ curl -X POST http://localhost:8001/consumers \
 
 # Create credential jwt things consumer
 curl -X POST http://localhost:8001/consumers/things-consumer/jwt \
-  -d "key=kreMES-things" \
+  -d "key=Vechr-things" \
   -d "algorithm=HS256" \
   -d "secret=SANGAT_RAHASIA"
 
 curl -X POST http://localhost:8001/consumers/auth-consumer/jwt \
-  -d "key=kreMES-auth" \
+  -d "key=Vechr-auth" \
   -d "algorithm=HS256" \
   -d "secret=SANGAT_RAHASIA"
 
 curl -X POST http://localhost:8001/consumers/db-logger-consumer/jwt \
-  -d "key=kreMES-db-logger" \
+  -d "key=Vechr-db-logger" \
   -d "algorithm=HS256" \
   -d "secret=SANGAT_RAHASIA"
 
 curl -X POST http://localhost:8001/consumers/notification-consumer/jwt \
-  -d "key=kreMES-notification" \
+  -d "key=Vechr-notification" \
   -d "algorithm=HS256" \
   -d "secret=SANGAT_RAHASIA"
 

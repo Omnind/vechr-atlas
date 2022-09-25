@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="" target="blank"><img src="https://svgshare.com/i/fmL.svg" width="320" alt="kreMES Logo" /></a>
+  <a href="" target="blank"><img src="https://svgshare.com/i/fmL.svg" width="320" alt="Vechr Logo" /></a>
 </p>
 
-kreMES (kre Manufacturing Execution System). This is Under [kreMES](LICENSE).
+Vechr (Manufacturing Execution System). This is Under [Vechr](LICENSE).
 
 # Importance Concepts
 The concep of this application is use UNS (Unified Namespace) as big node of the data. 
@@ -10,7 +10,7 @@ The concep of this application is use UNS (Unified Namespace) as big node of the
 ## Unified Namespace IIoT
 
 <p align="center">
-  <a href="" target="blank"><img src="./images/UNS.png" width="720" alt="kreMES Logo" /></a>
+  <a href="" target="blank"><img src="./images/UNS.png" width="720" alt="UNS" /></a>
 </p>
 
 Unified Namespace is an extended event-driven architecture, in which all data gets published regardless of whether there is an actual consumer or not. We leverages MQTT/NATS as a central message broker.
@@ -18,7 +18,7 @@ Unified Namespace is an extended event-driven architecture, in which all data ge
 ## ISA-95
 
 <p align="center">
-  <a href="" target="blank"><img src="./images/ISA-95.png" width="720" alt="kreMES Logo" /></a>
+  <a href="" target="blank"><img src="./images/ISA-95.png" width="720" alt="ISA-95" /></a>
 </p>
 
 If we compare with ISA-95, the data will flow from the Bottom (PLC) to the until Upper (Cloud), this is industry 3.0, In Industry 3.0 setups the general dataflow would be somewhat linear and would only flow in one direction: From the sensors to the PLC to SCADA and MES to the ERP. With a unified this would be much more connected, so if we compare with UNS, (ERP, SCADA, etc) we can say **node** and node will publish and consume the data from UNS system, so this will achieve integration more easy.
@@ -26,7 +26,7 @@ If we compare with ISA-95, the data will flow from the Bottom (PLC) to the until
 # Architecture Diagram
 
 <p align="center">
-  <a href="" target="blank"><img src="./images/IIoTArch.png" width="720" alt="kreMES Logo" /></a>
+  <a href="" target="blank"><img src="./images/IIoTArch.png" width="720" alt="Architecture" /></a>
 </p>
 
 # Setup Application
@@ -34,12 +34,12 @@ Before pulling you'll need to all **access** for submodule repository.
 
 ## Pull repository
 ```
-git clone --recursive git@github.com:kre-tech/kreMES.git
+git clone --recursive git@github.com:vechr/vechr-atlas.git
 ```
 
 Edit `.env` file, configure `APP_LISTS`, this line will decided what are the list of container that you'll run.
 ```
-APP_LISTS=notification-service,mail-dev,web-app,konga,konga-prepare,kong,postgres-db,pg-admin4,things-service,auth-service,db-logger-service,influxdb,nats-server,mosquitto,nats-box
+APP_LISTS=web-app,notification-service,db-logger-service,things-service,mail-dev,konga,konga-prepare,kong,postgres-db,pg-admin4,influxdb,nats-server,mosquitto
 ```
 ## Allowing Script
 Script must be have an access before executing
@@ -52,15 +52,10 @@ chmod 777 ./dockerfiles/database/postgres/create-multiple-db.sh
 
 ## Running All Container
 ```bash
-./up.sh
 ./dockerfiles/kong/setup-notification.sh
 ./dockerfiles/kong/setup-things.sh
+./up.sh
 ```
-
-## Setting Token Influx
-1. Go to http://localhost:8086
-2. Data > API Tokens > Copy your token
-3. Copy your token into .env `db-logger-service`
 
 # Setup Account Kong
 Go to `http://localhost:1337`
@@ -131,9 +126,9 @@ mosquitto_pub -h nats-server -p 1883 -t "NATS/MQTT/Test/" -m "This is message fr
 
 ## Publish MQTT Data
 Please use this topic format to store in database
-`kreMES/DashboardID/<Your Dashboard ID>/DeviceID/<Your Device ID>/topic/<Your Topic Name>`
+`Vechr/DashboardID/<Your Dashboard ID>/DeviceID/<Your Device ID>/topic/<Your Topic Name>`
 ```bash
-mosquitto_pub -h nats-server -p 1883 -t "kreMES/DashboardID/87jk234/DeviceID/9jk2b2189/topic/temp" -m "80.23"
+mosquitto_pub -h nats-server -p 1883 -t "Vechr/DashboardID/87jk234/DeviceID/9jk2b2189/topic/temp" -m "80.23"
 ```
 
 ## Query Data using Rest API
