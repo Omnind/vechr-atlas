@@ -1,15 +1,12 @@
-[submodule "microservices/db-logger-service"]
-	path = microservices/db-logger-service
-	url = git@github.com:kre-tech/db-logger-service.git
-[submodule "microservices/auth-service"]
-	path = microservices/auth-service
-	url = git@github.com:kre-tech/auth-service.git
-[submodule "microservices/things-service"]
-	path = microservices/things-service
-	url = git@github.com:kre-tech/things-service.git
 [submodule "application/web-app"]
 	path = application/web-app
-	url = git@github.com:kre-tech/web-app.git
+	url = git@github.com:vechr/web-app.git
+[submodule "microservices/things-service"]
+	path = microservices/things-service
+	url = git@github.com:vechr/things-service.git
 [submodule "microservices/notification-service"]
 	path = microservices/notification-service
-	url = git@github.com:kre-tech/notification-service.git
+	url = git@github.com:vechr/notification-service.git
+[submodule "microservices/db-logger-service"]
+	path = microservices/db-logger-service
+	url = git@github.com:vechr/db-logger-service.git
