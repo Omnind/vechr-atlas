@@ -56,39 +56,40 @@ services:
       - mosquitto
       - nats-box
 
-  # auth-service:
-  #   container_name: auth-service
-  #   build:
-  #     context: ./dockerfiles/microservices/auth
-  #     dockerfile: auth.dockerfile
-  #   working_dir: /app
-  #   volumes:
-  #     - ./microservices/auth-service:/app
-  #   ports:
-  #     - "3002:3000"
-  #     - "9230:9229"
-  #   env_file:
-  #     - microservices/auth-service/.env
-  #   depends_on:
-  #     - influxdb
-  #     - nats-server
-  #     - mosquitto
-  #     - nats-box
-  #     - postgres-db
+  auth-service:
+    container_name: auth-service
+    build:
+      context: ./dockerfiles/microservices/auth
+      dockerfile: auth.dockerfile
+    working_dir: /app
+    volumes:
+      - ./microservices/auth-service:/app
+    ports:
+      - "3002:3000"
+      - "9230:9229"
+      - "5555:5555"
+    env_file:
+      - microservices/auth-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
   
-  # auth-service-prod:
-  #   container_name: auth-service-prod
-  #   image: zulfikar4568/auth-service
-  #   ports:
-  #     - "3002:3000"
-  #   env_file:
-  #     - microservices/auth-service/.env
-  #   depends_on:
-  #     - influxdb
-  #     - nats-server
-  #     - mosquitto
-  #     - nats-box
-  #     - postgres-db
+  auth-service-prod:
+    container_name: auth-service-prod
+    image: zulfikar4568/auth-service
+    ports:
+      - "3002:3000"
+    env_file:
+      - microservices/auth-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
 
   things-service:
     container_name: things-service

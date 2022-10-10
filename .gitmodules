@@ -10,3 +10,6 @@
 [submodule "microservices/db-logger-service"]
 	path = microservices/db-logger-service
 	url = git@github.com:vechr/db-logger-service.git
+[submodule "microservices/auth-service"]
+	path = microservices/auth-service
+	url = git@github.com:vechr/auth-service.git

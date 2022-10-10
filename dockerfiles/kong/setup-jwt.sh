@@ -29,22 +29,22 @@ curl -X POST http://localhost:8001/consumers \
 curl -X POST http://localhost:8001/consumers/things-consumer/jwt \
   -d "key=Vechr-things" \
   -d "algorithm=HS256" \
-  -d "secret=SANGAT_RAHASIA"
+  -d "secret=secretvechr"
 
 curl -X POST http://localhost:8001/consumers/auth-consumer/jwt \
   -d "key=Vechr-auth" \
   -d "algorithm=HS256" \
-  -d "secret=SANGAT_RAHASIA"
+  -d "secret=secretvechr"
 
 curl -X POST http://localhost:8001/consumers/db-logger-consumer/jwt \
   -d "key=Vechr-db-logger" \
   -d "algorithm=HS256" \
-  -d "secret=SANGAT_RAHASIA"
+  -d "secret=secretvechr"
 
 curl -X POST http://localhost:8001/consumers/notification-consumer/jwt \
   -d "key=Vechr-notification" \
   -d "algorithm=HS256" \
-  -d "secret=SANGAT_RAHASIA"
+  -d "secret=secretvechr"
 
 # Testing JWT
 # curl -X GET localhost:8000/api/things/v1 -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtleSI6ImtyZU1FUyJ9.eyJleHAiOjY1N30.RGVVYLb2a1r4HT_hQczjWc87xUjXUB_cZrsFJk1nYjI'
