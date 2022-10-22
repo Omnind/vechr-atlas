@@ -160,6 +160,40 @@ services:
       - mosquitto
       - nats-box
       - postgres-db
+
+  audit-service:
+    container_name: audit-service
+    build:
+      context: ./dockerfiles/microservices/audit
+      dockerfile: audit.dockerfile
+    working_dir: /app
+    volumes:
+      - ./microservices/audit-service:/app
+    ports:
+      - "3005:3000"
+      - "9233:9229"
+      - "5560:5555"
+    env_file:
+      - ./microservices/audit-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
+  audit-service-prod:
+    container_name: audit-service-prod
+    image: zulfikar4568/audit-service
+    ports:
+      - "3005:3000"
+    env_file:
+      - ./microservices/audit-service/.env
+    depends_on:
+      - influxdb
+      - nats-server
+      - mosquitto
+      - nats-box
+      - postgres-db
       
   postgres-db:
     container_name: postgres-db

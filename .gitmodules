@@ -13,3 +13,6 @@
 [submodule "microservices/auth-service"]
 	path = microservices/auth-service
 	url = git@github.com:vechr/auth-service.git
+[submodule "microservices/audit-service"]
+	path = microservices/audit-service
+	url = git@github.com:vechr/audit-service.git
