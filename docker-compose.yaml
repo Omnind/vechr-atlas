@@ -35,6 +35,7 @@ services:
     ports:
       - "3001:3000"
       - "9229:9229"
+      - "5556:5555"
     env_file:
       - microservices/db-logger-service/.env
     depends_on:
@@ -67,7 +68,7 @@ services:
     ports:
       - "3002:3000"
       - "9230:9229"
-      - "5555:5555"
+      - "5557:5555"
     env_file:
       - microservices/auth-service/.env
     depends_on:
@@ -102,6 +103,7 @@ services:
     ports:
       - "3003:3000"
       - "9231:9229"
+      - "5558:5555"
     env_file:
       - microservices/things-service/.env
     depends_on:
@@ -136,6 +138,7 @@ services:
     ports:
       - "3004:3000"
       - "9232:9229"
+      - "5559:5555"
     env_file:
       - ./microservices/notification-service/.env
     depends_on:
