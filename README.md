@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="" target="blank"><img src="https://svgshare.com/i/fmL.svg" width="320" alt="Vechr Logo" /></a>
+  <a href="" target="blank"><img src="images/logo.svg" width="320" alt="Vechr Logo" /></a>
 </p>
 
 Vechr (Manufacturing Execution System). This is Under [Vechr](LICENSE).
