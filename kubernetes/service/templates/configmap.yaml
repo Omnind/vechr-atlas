@@ -7,6 +7,9 @@ metadata:
 data:
   APP_PORT: "3000"
   NATS_URL: "nats://nats.default.svc.cluster.local:4222"
+  JWT_SECRET: "secretvechr"
+  ECRYPTED_SECRET: "usersecret"
+  JWT_EXPIRES_IN: "3d"
 {{- if eq "db-logger-service" $.Values.name }}
   INFLUX_URL: "http://influxdb-service.default.svc.cluster.local:8086/"
   INFLUX_TOKEN: "vechr-token"
@@ -22,4 +25,13 @@ data:
   EMAIL_HOST: gmail-service.default.svc.cluster.local
   EMAIL_PORT: "587"
   DB_URL: "postgresql://Vechr:123@notification-db-service.default.svc.cluster.local:5434/notification_db?schema=public&connect_timeout=300"
+{{- end }}
+{{- if eq "audit-service" $.Values.name }}
+  DB_URL: "postgresql://Vechr:123@audit-db-service.default.svc.cluster.local:5436/audit_db?schema=public&connect_timeout=300"
+{{- end }}
+{{- if eq "auth-service" $.Values.name }}
+  JWT_REFRESH_EXPIRES_IN: "30d"
+  INITIAL_SITE: '{"code":"ST1","name":"Site Default","location":"Server Default"}'
+  INITIAL_SUPERUSER: '{"fullName":"root","username": "root","emailAddress":"root@vechr.id","phoneNumber":"+62","password":"password123"}'
+  DB_URL: "postgresql://Vechr:123@auth-db-service.default.svc.cluster.local:5435/auth_db?schema=public&connect_timeout=300"
 {{- end }}

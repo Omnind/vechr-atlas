@@ -1,0 +1,7 @@
+app:
+  name: "auth-db"
+  port: 5435
+auth:
+  postgresUser: Vechr
+  postgresPassword: "123"
+  postgresDatabase: "auth_db"
