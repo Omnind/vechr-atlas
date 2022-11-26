@@ -1,0 +1,44 @@
+{{if .Values.common.influx.enabled}}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ default "influxdb" .Values.common.influx.name }}
+  labels:
+    app: {{ default "influxdb" .Values.common.influx.name }}
+spec:
+  serviceName: {{ default "influxdb" .Values.common.influx.name }}-service
+  replicas: {{ default 1 .Values.common.influx.replicas }}
+  selector:
+    matchLabels:
+      app: {{ default "influxdb" .Values.common.influx.name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ default "influxdb" .Values.common.influx.name }}-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        resources:
+          requests:
+            storage: 2Gi
+  template:
+    metadata:
+      name: {{ default "influxdb" .Values.common.influx.name }}
+      labels:
+        app: {{ default "influxdb" .Values.common.influx.name }}
+    spec:
+      containers:
+        - name: {{ default "influxdb" .Values.common.influx.name }}
+          image: {{ default "influxdb" .Values.common.influx.deployment.image }}:{{ default "2.1.0-alpine" .Values.common.influx.deployment.tag }}
+          imagePullPolicy: "IfNotPresent"
+          ports:
+          - containerPort: 8086
+          envFrom:
+            - configMapRef:
+                name: {{ default "influxdb" .Values.common.influx.name }}-config
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: {{ default "influxdb" .Values.common.influx.name }}-pvc
+
+{{end}}

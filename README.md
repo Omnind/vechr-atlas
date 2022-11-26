@@ -29,7 +29,16 @@ If we compare with ISA-95, the data will flow from the Bottom (PLC) to the until
   <a href="" target="blank"><img src="./images/IIoTArch.png" width="720" alt="Architecture" /></a>
 </p>
 
-# Setup Application
+# Setup Application (Production)
+
+Make sure you already setup kubernetes cluster
+
+```bash
+cd kubernetes
+./install.sh
+```
+
+# Setup Application (Development)
 Before pulling you'll need to all **access** for submodule repository.
 
 ## Pull repository

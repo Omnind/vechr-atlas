@@ -1,0 +1,19 @@
+{{if .Values.common.frontend.enabled}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vechr-frontend-{{ .Values.common.frontend.name }}
+  labels:
+    app: vechr-frontend-{{ .Values.common.frontend.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: vechr-frontend-{{ .Values.common.frontend.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: {{ .Values.common.frontend.externalPort }}
+      targetPort:  {{ .Values.common.frontend.port }}
+
+{{end}}

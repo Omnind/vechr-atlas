@@ -1,7 +1,0 @@
-app:
-  name: "audit-db"
-  port: 5436
-auth:
-  postgresUser: Vechr
-  postgresPassword: "123"
-  postgresDatabase: "audit_db"

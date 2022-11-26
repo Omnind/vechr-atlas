@@ -1,7 +1,0 @@
-app:
-  name: "things-db"
-  port: 5433
-auth:
-  postgresUser: Vechr
-  postgresPassword: "123"
-  postgresDatabase: "things_db"

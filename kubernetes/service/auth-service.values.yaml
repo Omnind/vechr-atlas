@@ -1,6 +1,0 @@
-name: auth-service
-deployment:
-  image: zulfikar4568/auth-service
-  tag: latest
-service:
-  port: 3005

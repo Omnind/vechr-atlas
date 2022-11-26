@@ -1,0 +1,50 @@
+{{range $i, $value := .Values.common.postgres | default dict}}
+{{if $value.enabled}}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: vechr-postgres-{{$value.name}}
+  labels:
+    app: vechr-postgres-{{$value.name}}
+spec:
+  serviceName: vechr-postgres-{{$value.name}}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vechr-postgres-{{$value.name}}
+  volumeClaimTemplates:
+    - metadata:
+        name: vechr-postgres-{{$value.name}}-pvc
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        resources:
+          requests:
+            storage: 1Gi
+  template:
+    metadata:
+      name: vechr-postgres-{{$value.name}}
+      labels:
+        app: vechr-postgres-{{$value.name}}
+    spec:
+      containers:
+        - name: vechr-postgres-{{$value.name}}
+          image: postgres:14.3-alpine
+          imagePullPolicy: "IfNotPresent"
+          ports:
+          - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: vechr-postgres-{{$value.name}}-pvc
+          {{ if $value.env}}
+          env:
+            {{range $i, $env_value := $value.env}}
+            - name: {{$env_value.name}}
+              value: {{quote $env_value.value}}
+            {{end}}
+          {{end}}
+
+{{end}}
+{{end}}

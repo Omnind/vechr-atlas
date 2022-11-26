@@ -1,0 +1,19 @@
+{{if .Values.common.influx.enabled}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ default "influxdb" .Values.common.influx.name }}-service
+  labels:
+    app: {{ default "influxdb" .Values.common.influx.name }}
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ default "influxdb" .Values.common.influx.name }}
+  ports:
+    - protocol: TCP
+      name: http
+      port: {{ default 8086 .Values.common.influx.influx.port }}
+      targetPort: 8086
+
+{{end}}

@@ -1,0 +1,51 @@
+{{range $i, $value := .Values.microservices | default dict}}
+{{if $value.enabled}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vechr-microservice-{{$value.name}}
+  labels:
+    app: vechr-microservice-{{$value.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vechr-microservice-{{$value.name}}
+  template:
+    metadata:
+      name: vechr-microservice-{{$value.name}}
+      labels:
+        app: vechr-microservice-{{$value.name}}
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: vechr-microservice-{{$value.name}}
+          image: {{$value.image}}:{{$value.tag}}
+          {{if and $value.externalPort $value.port}}
+          ports:
+            - name: http
+              containerPort: {{$value.port}}
+              protocol: TCP
+          {{ end }}
+          imagePullPolicy: {{$value.imagePullPolicy | default "Always"}}
+          {{ if $value.env}}
+          env:
+            {{range $i, $env_value := $value.env}}
+            - name: {{$env_value.name}}
+              value: {{quote $env_value.value}}
+            {{end}}
+          {{end}}
+          # Resource Allocation
+          {{- if $value.resources }}
+          resources:
+            requests:
+              memory: {{ $value.resources.requests.memory | default "100Mi" | quote }}
+              cpu: {{ $value.resources.requests.cpu | default "100m" | quote }}
+            limits:
+              memory: {{ $value.resources.limits.memory | default "1024Mi" | quote }}
+              cpu: {{ $value.resources.limits.cpu | default "1" | quote }}
+          {{- end}}
+
+{{end}}
+{{end}}

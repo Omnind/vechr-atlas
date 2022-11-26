@@ -1,0 +1,17 @@
+{{if .Values.common.influx.enabled}}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ default "influxdb" .Values.common.influx.name }}-config
+  labels:
+    app: {{ default "influxdb" .Values.common.influx.name }}
+data:
+  DOCKER_INFLUXDB_INIT_MODE: {{ default "setup" .Values.common.influx.influx.mode }}
+  DOCKER_INFLUXDB_INIT_USERNAME: {{ default "admin" .Values.common.influx.auth.username }}
+  DOCKER_INFLUXDB_INIT_PASSWORD: {{ default "password123" .Values.common.influx.auth.password }}
+  DOCKER_INFLUXDB_INIT_ORG: {{ default "Vechr" .Values.common.influx.influx.organization }}
+  DOCKER_INFLUXDB_INIT_BUCKET: {{ default "Vechr" .Values.common.influx.influx.bucket }}
+  DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: {{ default "vechr-token" .Values.common.influx.influx.token }}
+
+{{end}}

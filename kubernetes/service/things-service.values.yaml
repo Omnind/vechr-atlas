@@ -1,6 +1,0 @@
-name: things-service
-deployment:
-  image: zulfikar4568/things-service
-  tag: latest
-service:
-  port: 3001

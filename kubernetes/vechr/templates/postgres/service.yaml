@@ -1,0 +1,19 @@
+{{range $i, $value := .Values.common.postgres | default dict}}
+{{if $value.enabled}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vechr-postgres-{{$value.name}}
+  labels:
+    app: vechr-postgres-{{$value.name}}
+spec:
+  type: ClusterIP
+  selector:
+    app: vechr-postgres-{{$value.name}}
+  ports:
+  - port: {{$value.externalPort}}
+    targetPort: 5432
+
+{{end}}
+{{end}}

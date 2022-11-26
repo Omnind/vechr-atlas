@@ -1,6 +1,0 @@
-name: web-app
-deployment:
-  image: zulfikar4568/web-app
-  tag: latest
-service:
-  port: 80

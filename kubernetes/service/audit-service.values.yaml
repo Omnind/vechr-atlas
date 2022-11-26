@@ -1,6 +1,0 @@
-name: audit-service
-deployment:
-  image: zulfikar4568/audit-service
-  tag: latest
-service:
-  port: 3004

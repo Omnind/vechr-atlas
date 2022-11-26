@@ -1,0 +1,27 @@
+{{range $i, $value := .Values.ingresses | default dict}}
+{{if $value.enabled}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{$value.name}}
+  namespace: default
+spec:
+  ingressClassName: kong
+  rules:
+  - http:
+      {{ if $value.services}}
+      paths:
+        {{range $i, $service := $value.services}}
+        - path: {{$service.path}}
+          pathType: Prefix
+          backend:
+            service:
+              name: {{$service.name}}
+              port:
+                number: {{$service.port}}
+        {{end}}
+      {{end}}
+
+{{end}}
+{{end}}

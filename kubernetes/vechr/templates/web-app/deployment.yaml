@@ -1,0 +1,43 @@
+{{if .Values.common.frontend.enabled}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vechr-frontend-{{ .Values.common.frontend.name }}
+  labels:
+    app: vechr-frontend-{{ .Values.common.frontend.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vechr-frontend-{{ .Values.common.frontend.name }}
+  template:
+    metadata:
+      name: vechr-frontend-{{ .Values.common.frontend.name }}
+      labels:
+        app: vechr-frontend-{{ .Values.common.frontend.name }}
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: vechr-frontend-{{ .Values.common.frontend.name }}
+          image: {{.Values.common.frontend.image}}:{{.Values.common.frontend.tag}}
+          {{if and .Values.common.frontend.externalPort .Values.common.frontend.port}}
+          ports:
+            - name: http
+              containerPort: {{.Values.common.frontend.port}}
+              protocol: TCP
+          {{ end }}
+          imagePullPolicy: {{.Values.common.frontend.imagePullPolicy | default "Always"}}
+
+          # Resource Allocation
+          {{- if .Values.common.frontend.resources }}
+          resources:
+            requests:
+              memory: {{ .Values.common.frontend.resources.requests.memory | default "100Mi" | quote }}
+              cpu: {{ .Values.common.frontend.resources.requests.cpu | default "100m" | quote }}
+            limits:
+              memory: {{ .Values.common.frontend.resources.limits.memory | default "1024Mi" | quote }}
+              cpu: {{ .Values.common.frontend.resources.limits.cpu | default "1" | quote }}
+          {{- end}}
+
+{{end}}

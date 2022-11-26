@@ -1,7 +1,0 @@
-app:
-  name: "notification-db"
-  port: 5434
-auth:
-  postgresUser: Vechr
-  postgresPassword: "123"
-  postgresDatabase: "notification_db"
