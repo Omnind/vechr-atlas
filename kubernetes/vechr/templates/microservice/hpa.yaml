@@ -1,0 +1,25 @@
+{{range $i, $value := .Values.microservices | default dict}}
+{{if $value.hpa.enabled}}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vechr-microservice-{{$value.name}}-hpa
+  labels:
+    app: vechr-microservice-{{$value.name}}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vechr-microservice-{{$value.name}}
+  minReplicas: {{$value.hpa.minReplicas | default 1}}
+  maxReplicas: {{$value.hpa.maxReplicas | default 5}}
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: {{$value.hpa.averageUtilization | default 50}}
+{{end}}
+{{end}}
