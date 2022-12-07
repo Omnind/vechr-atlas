@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: "1.0.0"
+appVersion: "1.0.1"
 
 name: vechr
 description: Helm Chart for Vechr Kubernetes
@@ -8,12 +8,14 @@ keywords:
 - IoT
 
 type: application
-version: 1.0.0
+version: 1.0.1
 home: https://github.com/vechr
 maintainers:
   - name: zulfikar
     url: https://github.com/zulfikar4568
     email: isnaen70@gmail.com
+
+icon: https://raw.githubusercontent.com/vechr/vechr-atlas/master/images/logo.svg
 
 
 dependencies:
