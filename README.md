@@ -2,6 +2,14 @@
   <a href="" target="blank"><img src="images/logo.svg" width="320" alt="Vechr Logo" /></a>
 </p>
 
+
+<p align="center">
+  <a href="https://artifacthub.io/packages/search?repo=vechr">
+    <img alt="Artifact Hub" src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/vechr">
+  </a>
+</p>
+
+
 Vechr (Manufacturing Execution System). This is Under [Vechr](LICENSE).
 
 # Importance Concepts
@@ -29,19 +37,25 @@ If we compare with ISA-95, the data will flow from the Bottom (PLC) to the until
   <a href="" target="blank"><img src="./images/IIoTArch.png" width="720" alt="Architecture" /></a>
 </p>
 
-# Setup Application (Production)
+## Helm Chart (Production)
 
-Make sure you already setup kubernetes cluster
+In this repo you can find the Helm 3 based [charts](https://github.com/vechr/vechr-atlas/tree/master/helm/charts) to install Vechr App.
 
-```bash
-cd kubernetes
-./install.sh
+```sh
+> helm repo add vechr https://vechr.github.io/vechr-atlas/helm/charts/
+> helm repo update
+
+> helm repo list
+NAME          	URL 
+vechr          	https://vechr.github.io/vechr-atlas/helm/charts/
+
+> helm install vechr vechr/vechr
 ```
 
-# Setup Application (Development)
+## Setup Application (Development)
 Before pulling you'll need to all **access** for submodule repository.
 
-## Pull repository
+### Pull repository
 ```
 git clone --recursive git@github.com:vechr/vechr-atlas.git
 ```
@@ -50,23 +64,29 @@ Edit `.env` file, configure `APP_LISTS`, this line will decided what are the lis
 ```
 APP_LISTS=web-app,notification-service,db-logger-service,things-service,mail-dev,konga,konga-prepare,kong,postgres-db,pg-admin4,influxdb,nats-server,mosquitto
 ```
-## Allowing Script
+### Allowing Script
 Script must be have an access before executing
 ```
 chmod 777 scripts/
 chmod 777 ./dockerfiles/database/postgres/create-multiple-db.sh
 ```
 
-# Running Application
+### Running Application
 
-## Running All Container
+Running all container
 ```bash
-./dockerfiles/kong/setup-notification.sh
-./dockerfiles/kong/setup-things.sh
 ./up.sh
 ```
 
-# Setup Account Kong
+After all container running, Setup the API gateway
+```bash
+./dockerfiles/kong/setup-notification.sh
+./dockerfiles/kong/setup-things.sh
+./dockerfiles/kong/setup-audit.sh
+./dockerfiles/kong/setup-auth.sh
+```
+
+### Setup Account Kong
 Go to `http://localhost:1337`
 1. Create your account
 2. Login
