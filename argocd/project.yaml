@@ -10,7 +10,11 @@ spec:
   sourceRepos:
   - '*'
   destinations:
-  - namespace: vechr-production
-    server: https://kubernetes.default.svc
-  - namespace: vechr-development
-    server: https://kubernetes.default.svc
+  - namespace: '*'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'

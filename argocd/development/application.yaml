@@ -10,5 +10,5 @@ spec:
     targetRevision: 1.0.3
     chart: vechr
   destination:
-    namespace: vechr-development
+    namespace: default
     server: 'https://kubernetes.default.svc'

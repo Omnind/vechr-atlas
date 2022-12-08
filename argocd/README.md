@@ -31,3 +31,10 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 argocd login localhost
 ```
 
+## Setup Vechr in Argo CD (Development)
+```bash
+kubectl apply -f ./repository.yaml
+kubectl apply -f ./project.yaml
+kubectl apply -f ./development/application.yaml
+```
+
