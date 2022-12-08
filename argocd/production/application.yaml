@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vechr-production
+  namespace: argocd
+spec:
+  project: vechr
+  source:
+    repoURL: 'https://vechr.github.io/vechr-atlas/helm/charts/'
+    targetRevision: 1.0.3
+    chart: vechr
+  destination:
+    namespace: vechr-production
+    server: 'https://kubernetes.default.svc'

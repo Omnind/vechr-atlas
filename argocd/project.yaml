@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: vechr
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Vechr Project IIoT
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: vechr-production
+    server: https://kubernetes.default.svc
+  - namespace: vechr-development
+    server: https://kubernetes.default.svc
