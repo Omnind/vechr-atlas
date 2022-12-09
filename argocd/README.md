@@ -33,6 +33,7 @@ argocd login localhost
 
 ## Setup Vechr in Argo CD (Development)
 ```bash
+cd argocd
 kubectl apply -f ./repository.yaml
 kubectl apply -f ./project.yaml
 kubectl apply -f ./development/application.yaml
