@@ -1,0 +1,37 @@
+name: 'Feature Request'
+description: Suggest a feature for Vechr Project
+
+body:
+  - type: dropdown
+    id: affected-packages
+    attributes:
+      label: Which package(s)/submodule are relevant/related to the feature request?
+      options:
+        - things service
+        - db logger service
+        - auth service
+        - audit service
+        - notification service
+        - web-app
+      multiple: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives-considered
+    attributes:
+      label: Alternatives Consideration
+    validations:
+      required: true
