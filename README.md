@@ -1,5 +1,18 @@
+<h1 align="center">Vehcr - SaaS for Manufacturing.</h1>
+
 <p align="center">
-  <a href="" target="blank"><img src="images/logo.svg" width="100" alt="Vechr Logo" /></a>
+  <a href="" target="blank"><img src="images/logo.svg" width="170px" alt="Vechr Logo" /></a>
+  <br>
+  <i>Vehcr is platfom SaaS to help productivity in manufacturing through Technology
+    <br> Running in Kubernetes Engine, it can be cloud or on premises.</i>
+  <br>
+</p>
+
+
+<p align="center">
+  <a href="https://github.com/vechr/vechr-atlas/issues">Submit an Issue</a>
+  <br>
+  <br>
 </p>
 
 
@@ -18,7 +31,7 @@ The concep of this application is use UNS (Unified Namespace) as big node of the
 ## Unified Namespace IIoT
 
 <p align="center">
-  <a href="" target="blank"><img src="./images/UNS.png" width="720" alt="UNS" /></a>
+  <a href="" target="blank"><img src="./images/UNS.png" width="500" alt="UNS" /></a>
 </p>
 
 Unified Namespace is an extended event-driven architecture, in which all data gets published regardless of whether there is an actual consumer or not. We leverages MQTT/NATS as a central message broker.
@@ -26,7 +39,7 @@ Unified Namespace is an extended event-driven architecture, in which all data ge
 ## ISA-95
 
 <p align="center">
-  <a href="" target="blank"><img src="./images/ISA-95.png" width="720" alt="ISA-95" /></a>
+  <a href="" target="blank"><img src="./images/ISA-95.png" width="500" alt="ISA-95" /></a>
 </p>
 
 If we compare with ISA-95, the data will flow from the Bottom (PLC) to the until Upper (Cloud), this is industry 3.0, In Industry 3.0 setups the general dataflow would be somewhat linear and would only flow in one direction: From the sensors to the PLC to SCADA and MES to the ERP. With a unified this would be much more connected, so if we compare with UNS, (ERP, SCADA, etc) we can say **node** and node will publish and consume the data from UNS system, so this will achieve integration more easy.
