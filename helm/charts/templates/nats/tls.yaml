@@ -1,0 +1,12 @@
+{{if .Values.natsSecret.enabled}}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{.Values.natsSecret.secretName}}
+type: kubernetes.io/tls
+data:
+  ca.crt: {{.Values.natsSecret.ca}}
+  tls.crt: {{.Values.natsSecret.cert}}
+  tls.key: {{.Values.natsSecret.key}}
+{{end}}
