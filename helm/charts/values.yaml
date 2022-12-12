@@ -1,77 +1,87 @@
 ########################################################### Config for Ingress ############################################################
 ingresses:
-  -
-    name: audit-kong-service
+  name: vechr-ingress
+  enabled: true
+  namespace: default
+  ingressClassName: kong
+
+  tls:
     enabled: true
-    services:
-      -
-        name: vechr-microservice-audit-service
-        path: /api/v2/audit
-        port: 3004
-      -
-        name: vechr-microservice-audit-service
-        path: /api/v1/audit
-        port: 3004
-      -
-        name: vechr-microservice-audit-service
-        path: /api/audit
-        port: 3004
-  -
-    name: auth-kong-service
-    enabled: true
-    services:
-      -
-        name: vechr-microservice-auth-service
-        path: /api/v2/auth
-        port: 3005
-      -
-        name: vechr-microservice-auth-service
-        path: /api/v1/auth
-        port: 3005
-      -
-        name: vechr-microservice-auth-service
-        path: /api/auth
-        port: 3005
-  -
-    name: notification-kong-service
-    enabled: true
-    services:
-      -
-        name: vechr-microservice-notification-service
-        path: /api/v2/notification
-        port: 3002
-      -
-        name: vechr-microservice-notification-service
-        path: /api/v1/notification
-        port: 3002
-      -
-        name: vechr-microservice-notification-service
-        path: /api/notification
-        port: 3002
-  -
-    name: things-kong-service
-    enabled: true
-    services:
-      -
-        name: vechr-microservice-things-service
-        path: /api/v2/things
-        port: 3001
-      -
-        name: vechr-microservice-things-service
-        path: /api/v1/things
-        port: 3001
-      -
-        name: vechr-microservice-things-service
-        path: /api/things
-        port: 3001
-  -
-    name: web-app-kong
-    enabled: true
-    services:
-      -
-        name: vechr-frontend-web-app
-        path: /
-        port: 80
+    secretName: kong-vechr-cert-dev
+    hosts: 
+      - app.vechr.com
+    ca: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVIekNDQXdlZ0F3SUJBZ0lVWWZsYWh1RFkrTXhSVndVb3NIU2hORzNsM3M4d0RRWUpLb1pJaHZjTkFRRUwKQlFBd2daNHhDekFKQmdOVkJBWVRBa2xFTVJNd0VRWURWUVFJREFwS1lYZGhJRUpoY21GME1ROHdEUVlEVlFRSApEQVpEYVcxaGFHa3hFVEFQQmdOVkJBb01DRlpsWTJoeUlFTkJNUjR3SEFZRFZRUUxEQlZEWlhKMGFXWnBZMkYwClpTQkJkWFJvYjNKcGRIa3hGakFVQmdOVkJBTU1EV0Z3Y0M1MlpXTm9jaTVqYjIweEhqQWNCZ2txaGtpRzl3MEIKQ1FFV0QyRmtiV2x1UUhabFkyaHlMbU52YlRBZUZ3MHlNakV5TVRFeE56SXdNelZhRncweU56RXlNVEF4TnpJdwpNelZhTUlHZU1Rc3dDUVlEVlFRR0V3SkpSREVUTUJFR0ExVUVDQXdLU21GM1lTQkNZWEpoZERFUE1BMEdBMVVFCkJ3d0dRMmx0WVdocE1SRXdEd1lEVlFRS0RBaFdaV05vY2lCRFFURWVNQndHQTFVRUN3d1ZRMlZ5ZEdsbWFXTmgKZEdVZ1FYVjBhRzl5YVhSNU1SWXdGQVlEVlFRRERBMWhjSEF1ZG1WamFISXVZMjl0TVI0d0hBWUpLb1pJaHZjTgpBUWtCRmc5aFpHMXBia0IyWldOb2NpNWpiMjB3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURIZjJlSkp4bG03b1hqaUNKZFdvT3dydlRGQkJtRHd5RUgyQlFlZExHck1GRThTZEFkT2EwcHk0UCsKYnZlTUxMWHF4ZDMvTFN3Y3FkcU1QZHNUSytYdWJacjJEeGlWa2FJVzlTMEw4aHlPekNaR0s4eTZFRVVRVDBPYwo5YkRsTHUyaStFZHNYUVZrWVlndjJnaVE3WjNTNTNxSHN4S3o0ZjFIRjl2N2ZsZDZYVXVFTm5Eak9relRvSTRFCmRSTUtId3FxM1lJOUJXdUY2VVQ1N1NqdFFMNGhBWWhER3F2VHRHUE1DWm1HZ2V6OS9ieFU0dVk0d053bm1tRysKdjFDNkJSRnFaandEOFlzbmRRd2ZkV0RKTVJ0dFRueDkyUGpSVkxBWThCd3Vuams4MXByR2JlUW5kNjJEMldPSwpFbGtlUG4zc2xCSlFKc1RzcVFnV3hDY0M0RE1wQWdNQkFBR2pVekJSTUIwR0ExVWREZ1FXQkJUUjJKN1Q1d21nCnhVRmdMSmZ3V1BndldzQ1BQREFmQmdOVkhTTUVHREFXZ0JUUjJKN1Q1d21neFVGZ0xKZndXUGd2V3NDUFBEQVAKQmdOVkhSTUJBZjhFQlRBREFRSC9NQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJzUENTcTFlODdUbERhRGJzaApvbDJJY2s2c05tOWwxL1NMcmxWdUxsVU1NcmlQL3YxZmorYTAvV3MyS2ZXaXYzWFJtbGg2aHptNFFSdmN2a3N0CmpNb1A2NitzWU1EZ2kyUUZWamQ4ZzZuZkpiMXkzL2o4dFVLZFc1N3g2QTVwNlpNY3FubWFKWElSWjJ2VUlNMmoKdk5Qa0s3OWFxMUJJSEZBeVVLMksvenlkUjBvY21GL2F5dE41K2xnM0FtWXhtWHE3RGZRU0Z5L3ZOSHZZU3dCaQpxV3U5c0VFQUk1aG5yc0Q2SDFsWnczVFBLd2dxK0JMM0RIS0pLbmM5clpkc3FMMHBSODFEaFo3U2E1R2p2TGRPCmtUeWdyTmpYSU5QZ3RUQzFpTURnUjFxU3hlMXBscTllVWZpZU4yZ0pDL2R1VDZSMU1sc244Sm1YaHVFQXJ6QzcKbndjUAotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVMakNDQXhhZ0F3SUJBZ0lVYzJVWXV4cy8vR25oWTZPMUtRR0xKa0FYTFNVd0RRWUpLb1pJaHZjTkFRRUwKQlFBd2daNHhDekFKQmdOVkJBWVRBa2xFTVJNd0VRWURWUVFJREFwS1lYZGhJRUpoY21GME1ROHdEUVlEVlFRSApEQVpEYVcxaGFHa3hFVEFQQmdOVkJBb01DRlpsWTJoeUlFTkJNUjR3SEFZRFZRUUxEQlZEWlhKMGFXWnBZMkYwClpTQkJkWFJvYjNKcGRIa3hGakFVQmdOVkJBTU1EV0Z3Y0M1MlpXTm9jaTVqYjIweEhqQWNCZ2txaGtpRzl3MEIKQ1FFV0QyRmtiV2x1UUhabFkyaHlMbU52YlRBZUZ3MHlNakV5TVRFeU1UQTJNRE5hRncweU16RXlNVEV5TVRBMgpNRE5hTUlHTU1Rc3dDUVlEVlFRR0V3SkpSREVUTUJFR0ExVUVDQXdLU21GM1lTQkNZWEpoZERFUE1BMEdBMVVFCkJ3d0dRMmx0WVdocE1RNHdEQVlEVlFRS0RBVldaV05vY2pFUE1BMEdBMVVFQ3d3R1JHVjJUM0J6TVJZd0ZBWUQKVlFRRERBMWhjSEF1ZG1WamFISXVZMjl0TVI0d0hBWUpLb1pJaHZjTkFRa0JGZzloWkcxcGJrQjJaV05vY2k1agpiMjB3Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRRFVLNVJBSXlYd2NXUTBBWXVHCnhWbENUd1dIYzE3WmwxWnR1b2RLbVNWdzFOTlA2ZitSYnEzQ0VJbkxpaVdYMHdocks3RlM2WEJIQ2piMEhJcTAKTVRCWERSdEhHRWVXUGdXSmlTUkhFeUQ1Nm13cDBKdnpSajFYN0RVcWV2RHMzU2piRFBSdjY4c1BxekRIUkx3NQo3emRUSEFFbG5zU3dwb2hDRjNZaTBLTENGRTVvUkU3NnNUeVZHSW5BZ1FXUXNMUlJEL1hpbFRDQ3ltL1hZMTEwClJyRUpXT3V5QnNPWW1kYVNpdVMyempKNlVsZXJhOWJFTUJ5WTAvT1JDWGV1UmdCR0ljcjAzSEcxV3VjZFNHbHoKaHg1dERqY3BQRmh2UkltbUFON2tiZVY2bGh6dXRGQWxOaFlwNmdvT3k0V1NuVngranlzVXg5UVpkZU9BS0ltbAoxNDZaQWdNQkFBR2pkREJ5TUI4R0ExVWRJd1FZTUJhQUZOSFludFBuQ2FERlFXQXNsL0JZK0M5YXdJODhNQWtHCkExVWRFd1FDTUFBd0N3WURWUjBQQkFRREFnVHdNQmdHQTFVZEVRUVJNQStDRFdGd2NDNTJaV05vY2k1amIyMHcKSFFZRFZSME9CQllFRk5vVzAvYVF4a24zbWpKZU5uaFk1bjdFSDZZU01BMEdDU3FHU0liM0RRRUJDd1VBQTRJQgpBUUNuTmZvQXZMbWk2TUZpenE5czMrUmN2YmROekd6WnZCc3hXYjR1Z0J4WHpLMmZ2MDl4ZDRaQjJNejlkY1BlCkM4Ui9HbVdjS3owaUVzNWRqSDRGbmEzSHJqbWNYZnYvck1WUDdsUjFDOWRTL2tTTEptRW1laUhzVFZ0M2ptNTcKUXc0UkpMM013RXdTQ1Qxbnl3RVlKZlROTXB1bmtVdmhvVVc0QVhyNGpralR4ZTd5THhMU1cvZWtTOTRCYldmcQpSY3kwc0R5a3M2VGJ3MDA5K0owWXFBWk9VSUYyWWhub2U4MzlXV2hPem4xcHFXRXFKcFVIaWRYaFBXRnpTQS9MCjBqc3hlQ0wrWkRMSmJZa2g1QWQzdEhDNExwRkg5U2NWTlVQYmF1M0NlcUJNZVovVFd3UXhTbUpIMEs3TGx5RmUKRVVHeE5DNm16UE1SaVpWdXlrOTJ4cXl4Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2QUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktZd2dnU2lBZ0VBQW9JQkFRRFVLNVJBSXlYd2NXUTAKQVl1R3hWbENUd1dIYzE3WmwxWnR1b2RLbVNWdzFOTlA2ZitSYnEzQ0VJbkxpaVdYMHdocks3RlM2WEJIQ2piMApISXEwTVRCWERSdEhHRWVXUGdXSmlTUkhFeUQ1Nm13cDBKdnpSajFYN0RVcWV2RHMzU2piRFBSdjY4c1BxekRIClJMdzU3emRUSEFFbG5zU3dwb2hDRjNZaTBLTENGRTVvUkU3NnNUeVZHSW5BZ1FXUXNMUlJEL1hpbFRDQ3ltL1gKWTExMFJyRUpXT3V5QnNPWW1kYVNpdVMyempKNlVsZXJhOWJFTUJ5WTAvT1JDWGV1UmdCR0ljcjAzSEcxV3VjZApTR2x6aHg1dERqY3BQRmh2UkltbUFON2tiZVY2bGh6dXRGQWxOaFlwNmdvT3k0V1NuVngranlzVXg5UVpkZU9BCktJbWwxNDZaQWdNQkFBRUNnZ0VBRllMcUcrTWNaMytObythMHMyZzZvNm9Rb3RJd0Q1SmtHMG0yU2hwVEpSaVUKNktVdVNkdmRmdCt2b3R6NXNRWWUxRVBZclpINHRlRXJuMjR0NDNWWncvZXltRytXSVgzZUVKcmduRnFzaFI0dgpFNEhBc0FhQzlYRS8xalBqRGJiaUc2eDVjNGdGL1d1VFRWN1RFVEluYXpRYml5bUk0bXF1QmJwc2VqenFSWkE3ClltMXRiV294VXRsY0hCZWlCVkUrVlB0T3gvSUpGYWJNTEdkRFBjazk4MlNuMWJGbGpGbFBVQTNtMTdIWlhjbHIKZTlwcXB4eWZJR3djdVJzOXNyRDBCWmdtM1U3WXYvaGtXUlhZSzBDcDNSM3FyR3drMXZ2Ni9EckhkcWliWmtaZQozYkhPRHI5YnFLbmxpbkYvWmFScjEyelRSUmZkdXVMM1FKb3RKZ2FYVVFLQmdRRDVENXQ1bE5MTEZUM3BzbjlWClE3cXNwdWt6V2ttcjFmZ1hEYVF5QmxVZ2pkdDcrNlZ3bDFWeWU5SUhPSEFtanBpY0Q1aHVwMVkyN2lkakd3ckwKMU82MHRNM01weXdzK29mcTFDY1M4enE3N2QzdzY5MkpTVmNYbzdpdXc2TEpsd080MDJGMXVOaHUzRlJENmVLegp4TWVtQUU4cjlXNnNmdVFGWVgzWkcwbXpDUUtCZ1FEYUZOcVBDeHA1YWtwMlQraHdjcjhKTmlaVGNyMjl2STlRCjRKMSs5dTdrWGFDT0VEb0x3T2htajB1QklCVmZOM0hqVzhJME9GUnl4L3E1MXkwNy9mNTFFSTJqQVRmUGRhRGEKbXA0cjE4SFY5NCsyKzFzY0xjQXRSZFdab2dhbFhUQUQvUEF2UEFnYmFnUWd0L1VWREZhS0YybjZwWlBGYzBzUQpQSW13M2FFVEVRS0JnQnRraEEwVE9UdnMwaXBwMzJkWlU2YTVsTng1Q2JGRWoweTV5MTFWSlBlM29uUTRjVEc0CjgwVHNLV1Z4NTZQVit5THU5Q3ozYXB3UUJYVDQvRzcrdEdKYm9HYnAzQW4yWkF5SDJPUlVyQmtQU0dHL0QxYVMKSW1vUEw3akkrNWFBYllCZWYxR2JTdkttZVA0Zk16ZmlaTEwxUmIvbjlvd3lTSkh1N3hCNTE5bEJBb0dBWXlIOQpvKzU1TDE0STBUVkx4T24wT3h5NVdVK2NQc2FiSXptbmZsS0RqNTJiNFZndytxekxOK3ZGZDhIODFSYWdGNmpiClk5K0RTOVhwL0ZaN0FuMVlFU0RnTVl2Wk1kNFhxNmVEWlF5ajJUNjZ2b1FPQzRZa2lLL3BBL2hxS3Z0c1d6TzgKZnN3OEp6SVBCRXg3QlFGaHlVNFJaOVdpa2F2eUlFUlVsdWg0VXZFQ2dZQjI4LzRJVkxOTGFGOGM4RVRqdDJWZwppcWQ5T1doVnIvRUl3U2YvUVRNMEdzbWh4RGRLSk1NaE1kTW1aMmhkUFZNaFRUUHRxbFRRM3hDVUF3Y2tVd0lrCldFRjRvWnBkNXoraUFVRkxjTjRHWmk4ZWpFWnNWemF1VkdrVmlrbTVrc1BaVFM3b04xZDdqTUJsQU5aRnh5THQKbE5iNzRWeGROOU9aWEdxZ3hyb2Jtdz09Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+  
+  rules:
+    -
+      host: app.vechr.com
+      services:
+        -
+          name: vechr-microservice-audit-service
+          path: /api/v2/audit
+          port: 3004
+        -
+          name: vechr-microservice-audit-service
+          path: /api/v1/audit
+          port: 3004
+        -
+          name: vechr-microservice-audit-service
+          path: /api/audit
+          port: 3004
+    -
+      host: app.vechr.com
+      services:
+        -
+          name: vechr-microservice-auth-service
+          path: /api/v2/auth
+          port: 3005
+        -
+          name: vechr-microservice-auth-service
+          path: /api/v1/auth
+          port: 3005
+        -
+          name: vechr-microservice-auth-service
+          path: /api/auth
+          port: 3005
+    -
+      host: app.vechr.com
+      services:
+        -
+          name: vechr-microservice-notification-service
+          path: /api/v2/notification
+          port: 3002
+        -
+          name: vechr-microservice-notification-service
+          path: /api/v1/notification
+          port: 3002
+        -
+          name: vechr-microservice-notification-service
+          path: /api/notification
+          port: 3002
+    - 
+      host: app.vechr.com
+      services:
+        -
+          name: vechr-microservice-things-service
+          path: /api/v2/things
+          port: 3001
+        -
+          name: vechr-microservice-things-service
+          path: /api/v1/things
+          port: 3001
+        -
+          name: vechr-microservice-things-service
+          path: /api/things
+          port: 3001
+    -
+      host: app.vechr.com
+      services:
+        -
+          name: vechr-frontend-web-app
+          path: /
+          port: 80
         
 ############################################################ Config for Common ############################################################
 common:
@@ -405,27 +415,44 @@ nats:
     replicas: 3
     noAdvertise: true
 
-  nats:
-    image: nats:alpine
-    jetstream:
+    # tls:
+    #   secret:
+    #     name: nats-cert-dev
+    #   ca: "ca.crt"
+    #   cert: "tls.crt"
+    #   key: "tls.key"
+
+  jetstream:
+    enabled: false
+
+    memStorage:
       enabled: true
+      size: "2Gi"
 
-      memStorage:
-        enabled: true
-        size: 2Gi
-
-      fileStorage:
-        enabled: true
-        size: 1Gi
-        storageDirectory: /data/
+    fileStorage:
+      enabled: true
+      size: "1Gi"
+      storageDirectory: /data/
+      storageClassName: default
 
   mqtt:
     enabled: true
     port: 1883
 
+    # tls:
+    #   secret:
+    #     name: nats-cert-dev
+    #   ca: "ca.crt"
+    #   cert: "tls.crt"
+    #   key: "tls.key"
+
   websocket:
     enabled: true
     port: 9090
+    # noTLS: true
+
+    # sameOrigin: false
+    # allowedOrigins: []
 
   natsbox:
     enabled: true
@@ -470,20 +497,3 @@ kong:
       # Additional listen parameters, e.g. "reuseport", "backlog=16384"
       parameters:
       - http2
-
-    # Kong admin ingress settings. Useful if you want to expose the Admin
-    # API of Kong outside the k8s cluster.
-    ingress:
-      # Enable/disable exposure using ingress.
-      enabled: false
-      ingressClassName:
-      # TLS secret name.
-      # tls: kong-admin.example.com-tls
-      # Ingress hostname
-      hostname:
-      # Map of ingress annotations.
-      annotations: {}
-      # Ingress path.
-      path: /
-      # Each path in an Ingress is required to have a corresponding path type. (ImplementationSpecific/Exact/Prefix)
-      pathType: ImplementationSpecific

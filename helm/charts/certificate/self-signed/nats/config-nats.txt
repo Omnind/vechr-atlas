@@ -1,0 +1,16 @@
+authorityKeyIdentifier = keyid,issuer
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = charts-nats-0.charts-nats.default.svc.cluster.local
+DNS.2 = charts-nats-1.charts-nats.default.svc.cluster.local
+DNS.3 = charts-nats-2.charts-nats.default.svc.cluster.local
+DNS.4 = vechr-development-nats-0.vechr-development-nats.default.svc.cluster.local
+DNS.5 = vechr-development-nats-1.vechr-development-nats.default.svc.cluster.local
+DNS.6 = vechr-development-nats-2.vechr-development-nats.default.svc.cluster.local
+DNS.7 = vechr-production-nats-0.vechr-production-nats.default.svc.cluster.local
+DNS.8 = vechr-production-nats-1.vechr-production-nats.default.svc.cluster.local
+DNS.9 = vechr-production-nats-2.vechr-production-nats.default.svc.cluster.local
+DNS.10 = app.vechr.com

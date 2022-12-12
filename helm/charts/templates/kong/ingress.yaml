@@ -1,18 +1,30 @@
-{{range $i, $value := .Values.ingresses | default dict}}
-{{if $value.enabled}}
+{{if .Values.ingresses.enabled}}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{$value.name}}
-  namespace: default
+  name: {{.Values.ingresses.name}}
+  namespace:  {{.Values.ingresses.namespace}}
 spec:
-  ingressClassName: kong
+  ingressClassName:  {{.Values.ingresses.ingressClassName}}
+  {{if .Values.ingresses.tls.enabled}}
+  tls:
+  - hosts: 
+      {{if .Values.ingresses.tls.hosts}}
+      {{range $i, $host := .Values.ingresses.tls.hosts}}
+      - {{$host}}
+      {{end}}
+      {{end}}
+    secretName: {{.Values.ingresses.tls.secretName}}
+  {{end}}
   rules:
-  - http:
-      {{ if $value.services}}
+  {{if .Values.ingresses.rules}}
+  {{range $i, $rule := .Values.ingresses.rules}}
+  - host: {{$rule.host}}
+    http:
+      {{ if $rule.services}}
       paths:
-        {{range $i, $service := $value.services}}
+        {{range $j, $service := $rule.services}}
         - path: {{$service.path}}
           pathType: Prefix
           backend:
@@ -22,6 +34,6 @@ spec:
                 number: {{$service.port}}
         {{end}}
       {{end}}
-
-{{end}}
+  {{end}}
+  {{end}}
 {{end}}

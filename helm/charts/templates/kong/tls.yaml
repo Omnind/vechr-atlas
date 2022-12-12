@@ -1,0 +1,15 @@
+{{if .Values.ingresses.tls.enabled}}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{.Values.ingresses.tls.secretName}}
+type: kubernetes.io/tls
+stringData:
+  ca.crt: |
+    {{.Values.ingresses.tls.ca | nindent 4}}
+  tls.crt: |
+    {{.Values.ingresses.tls.cert | nindent 4}}
+  tls.key: |
+    {{.Values.ingresses.tls.key | nindent 4}}
+{{end}}
